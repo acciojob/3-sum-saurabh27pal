@@ -1,29 +1,20 @@
 function threeSum(arr, target) {
-  let closestSum = Infinity;
-  let closestTriplet;
-
-  // Sort the array
-  S.sort((a, b) => a - b);
-
-  // Iterate through the array and find the closest sum
-  for (let i = 0; i < S.length - 2; i++) {
-    let left = i + 1;
-    let right = S.length - 1;
-    while (left < right) {
-      let sum = S[i] + S[left] + S[right];
-      if (Math.abs(sum - target) < Math.abs(closestSum - target)) {
-        closestSum = sum;
-        closestTriplet = [S[i], S[left], S[right]];
+  //your code here
+  let ans = Infinity;
+  arr.sort((a, b) => a - b);
+  arr.forEach((a, i) => {
+    const target2 = target - a;
+    let l = i + 1;
+    let r = arr.length - 1;
+    while (l < r) {
+      if (Math.abs(target - (arr[l] + arr[r] + a)) <= Math.abs(target - ans)) {
+        ans = arr[l] + arr[r] + a;
       }
-      if (sum < target) {
-        left++;
-      } else {
-        right--;
-      }
+      if (arr[l] + arr[r] > target2) r--;
+      else l++;
     }
-  }
-  return closestSum;
-
+  });
+  return ans;
 }
-
+ 
 module.exports = threeSum;
